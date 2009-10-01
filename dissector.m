@@ -18,10 +18,13 @@ int main (int argc, const char * argv[]) {
     // NSString *dissectableString = @"1234\5\"6";  // passed, \5 returns blank line
     NSString *dissectableString = @"this is a longer string for some fun";
     
-    NSLog(@"Dissect using a loop.");
     NSLog(@"This string will be dissected: %@", dissectableString);
-    NSLog(@"The string contains %d characters. \n", [dissectableString length]);
-    
+    // use singular and plural.  Alternatively could use  ?@"":@"s"
+    NSLog(@"The string contains %d %@. \n\n",
+          [dissectableString length],
+          (1 == [dissectableString length])?@"character":@"characters");
+
+    NSLog(@"Dissect using a loop.");    
     NSUInteger i;
     for (i = 0; i < [dissectableString length]; i++) {
         
@@ -37,18 +40,18 @@ int main (int argc, const char * argv[]) {
 
 // This method appears slightly more complicated than looping, may use more memory
 void dissectByRecursion(NSString *aString) {
-    switch ([aString length]) {
-        case 0:
-            // done
-            break;
-        case 1:
-            NSLog(@"%c", [aString characterAtIndex:0]);
-            break;
-        default:
-            NSLog(@"%c", [aString characterAtIndex:0]);
-            dissectByRecursion([aString substringFromIndex:1]);
-            break;
-    }
+    int aStringLength = [aString length];
+
+    if (0 == aStringLength) {
         return;
+    }
+    else {
+        NSLog(@"%c", [aString characterAtIndex:0]);
+        if (aStringLength > 1)
+        {
+            dissectByRecursion([aString substringFromIndex:1]);
+        }
+    }
+    return;
 }
 
