@@ -45,7 +45,7 @@ int main (int argc, const char * argv[]) {
 // This method appears slightly more complicated than looping, may use more memory
 void dissectByRecursion(NSString *aString) {
     
-    int aStringLength = [aString length];
+    NSUInteger aStringLength = [aString length];
 
     if (0 == aStringLength) {
         return;
